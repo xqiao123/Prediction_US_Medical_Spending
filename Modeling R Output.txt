@@ -1,0 +1,24 @@
+> ##########> #--One pruned tree--#> ##########
+> cv.tree$results          cp     RMSE  Rsquared      MAE   RMSESD RsquaredSD    MAESD1 0.03508263 1439.647 0.3553618 1170.089 676.3806  0.3150798 514.61582 0.15991014 1540.227 0.2197710 1231.838 605.6690  0.2155502 454.20513 0.19553531 1494.196 0.2496460 1218.408 609.9211  0.2624929 482.8930
+> Acc.tree      RMSE    Rsquare1 1278.802 0.09585777> system.time(train(x=trans.tr.pred,y=tr.response,method='rpart',trControl=ctrl))   user  system elapsed   1.195   0.026   1.251 
+> varImp(cv.tree)rpart variable importance                  OverallAve_Hospital       100.00Ave_Income          81.74Vaccined_Rate       69.21Ave_GSP             53.62Ave_Physicians      50.81Senior_Rate         27.85Life_Expectancy      0.00care_yn              0.00Smoking_Rate         0.00Unemployment_Rate    0.00
+
+
+
+> ###################> #--Next, a bagged tree---#> ###################
+> cv.bagged.tree$results  parameter     RMSE  Rsquared      MAE   RMSESD RsquaredSD    MAESD1      none 1264.524 0.4398577 1040.146 607.9136  0.3185713 480.1155
+> Acc.TreeBagged      RMSE   Rsquare1 915.2019 0.5182582> system.time(train(x=trans.tr.pred,y=tr.response,method='treebag',trControl=ctrl))   user  system elapsed   4.718   0.047   4.823 > varImp(cv.bagged.tree)treebag variable importance                  OverallAve_Hospital       100.00Ave_Income          54.16Senior_Rate         50.98Smoking_Rate        47.61Vaccined_Rate       44.19Life_Expectancy     39.58Ave_Physicians      34.52Ave_GSP             25.00Unemployment_Rate   20.40care_yn              0.00
+
+
+
+> ###################> #--Next, a random forest---#> ###################
+
+> cv.randomforest$results  mtry     RMSE  Rsquared      MAE   RMSESD RsquaredSD    MAESD1    2 1311.030 0.3361168 1086.176 544.1125  0.3003070 427.91072    6 1308.818 0.3370224 1086.339 549.3623  0.3107798 420.96393   10 1311.561 0.3392422 1086.420 559.8351  0.2959040 422.4668> Acc.RF      RMSE   Rsquare1 931.3436 0.6442914> system.time(train(x=trans.tr.pred,y=tr.response,method='cforest',trControl=ctrl))   user  system elapsed   5.062   0.069   5.150 > varImp(cv.randomforest)cforest variable importance                  OverallAve_Hospital       100.00Ave_Income          61.97Ave_GSP             49.55Smoking_Rate        32.73Vaccined_Rate       20.36Senior_Rate         19.11Ave_Physicians      18.19Life_Expectancy     13.82care_yn             10.09Unemployment_Rate    0.00
+
+
+
+> ##################> #---A simple straight line---#> ##################
+> summary(cv.linearreg$finalModel)Call:lm(formula = .outcome ~ ., data = dat)Residuals:    Min      1Q  Median      3Q     Max -2546.1  -586.6   136.7   534.7  1913.0 Coefficients:                  Estimate Std. Error t value Pr(>|t|)    (Intercept)        7022.74     389.19  18.044   <2e-16 ***Ave_GSP             335.01     265.69   1.261   0.2177    Unemployment_Rate   314.40     268.12   1.173   0.2508    Life_Expectancy   -1290.95     534.88  -2.414   0.0226 *  Ave_Income         1509.02     352.98   4.275   0.0002 ***Ave_Hospital        735.30     295.15   2.491   0.0189 *  Ave_Physicians       51.07     290.72   0.176   0.8618    Smoking_Rate       -126.87     452.30  -0.281   0.7811    Vaccined_Rate        26.00     292.59   0.089   0.9298    Senior_Rate          98.91     248.11   0.399   0.6932    care_ynYes          -95.44     527.60  -0.181   0.8578    ---Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1Residual standard error: 1040 on 28 degrees of freedomMultiple R-squared:  0.6179,	Adjusted R-squared:  0.4815 F-statistic: 4.528 on 10 and 28 DF,  p-value: 0.0007473  0.814   0.009   0.831 
+
+> cv.linearreg$results  intercept     RMSE  Rsquared      MAE   RMSESD RsquaredSD    MAESD1      TRUE 1234.477 0.5324037 1029.954 513.7078  0.3380201 389.9836
+> Acc.Line      RMSE   Rsquare1 1689.069 0.4666997> system.time(train(x=trans.tr.pred,y=tr.response,method='lm',trControl=ctrl))   user  system elapsed   0.847   0.011   0.869 > varImp(cv.linearreg)lm variable importance                  OverallAve_Income        100.000Ave_Hospital       57.388Life_Expectancy    55.532Ave_GSP            27.998Unemployment_Rate  25.888Senior_Rate         7.401Smoking_Rate        4.578care_ynYes          2.198Ave_Physicians      2.074Vaccined_Rate       0.000
