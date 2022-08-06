@@ -15,4 +15,4 @@ It can be seen from the above that MSPB is a huge cost, and the large number of 
 ## The Dataset
 This is the nationwide small dataset with 51 observations and 12 variables provided by  [KFF](https://www.kff.org/state-category/medicare/medicare-enrollment-by-eligibility-category/). There is no missing value in the dataset, and 10 out of 12 variables will be used as predictors, and ‘MSPB’ will be used as a response variable.
 
-Please click (here)[https://github.com/xqiao123/Prediction_US_Medical_Spending/blob/main/Report.pdf] to view the complete report. 
+Please click [here](https://github.com/xqiao123/Prediction_US_Medical_Spending/blob/main/Report.pdf) to view the complete report. 
