@@ -1,4 +1,5 @@
 # Predicting State Medicare Spending Per Beneficiary
+Xuefei Qiao
 
 ## Abstract
 This is the report to explore what features may influence the State Medicare Spending Per Beneficiary (MSPB) and how they influence it through picking the best-fit Regression model among one pruned tree, simple linear regression, bagged trees and random forests to forecast the value.
